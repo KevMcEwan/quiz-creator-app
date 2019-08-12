@@ -1,33 +1,60 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.question-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  width: 80%;
+  margin: 10%
 }
 
-.App-link {
-  color: #61dafb;
+.question {
+  margin-top: 1%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.quiz-name {
+  background-color: pink;
+  text-align: center;
+  font-size: 36px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+/* .question-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 80%;
+  margin: 10%
+} */
+
+.radio-button-answer {
+  background-color: lightblue;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.question-text {
+  background-color: lightgoldenrodyellow;
+  text-align: center;
+  font-size: 36px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.submit-button {
+  width: 50%;
+  background-color: orange;
+  font-size: 18px;
+  margin-left: 25%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-radius: 15px;
+}
+
+.title {
+  font-size: 36px;
+  text-align: center;
+  margin: 1%;
 }
