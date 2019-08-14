@@ -1,16 +1,32 @@
 import React from 'react';
 import './App.css';
-import AnswerForm from './components/AnswerForm';
-import RadioButtonAnswer from './components/RadioButtonAnswer';
-import Question from './components/Question';
-import Title from './components/Title';
-import QuestionList from './components/QuestionList';
+import CreateAQuiz from './components/CreateAQuiz';
+import NavBar from './components/NavBar';
+import HomePage from './components/HomePage';
+import QuizContainer from './containers/QuizContainer';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      
-      <QuestionList/>
+      <Router>
+        <NavBar />
+        <Route exact path="/"
+          render={() =>
+            <HomePage />
+          }
+        />
+        <Route path="/quiz-list"
+          render={() =>
+            <QuizContainer />
+          }
+        />
+        <Route path="/create-a-quiz"
+          render={() =>
+            <CreateAQuiz />
+          }
+        />
+      </Router>
     </div>
   );
 }
