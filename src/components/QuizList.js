@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Quiz from './Quiz';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -12,8 +12,6 @@ const QuizList = (props) => {
             console.log(event.target);
             props.handleCurrentQuizChange(newQuiz);
         };
-
-        const quizRoute = "quiz:" + quiz.id;
        
         return <li>
                 <button onClick={handleClick} value={quiz.id}>
