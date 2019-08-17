@@ -4,9 +4,11 @@ import Quiz from '../components/Quiz';
 import NavBar from '../components/NavBar';
 
 class QuizContainer extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
+            currentQuiz: null,
             quizArray: [
                 {
                     id: 1,
@@ -32,7 +34,6 @@ class QuizContainer extends Component {
                             wrongAnswerArray: ["Yuri Gagarin", "Buzz Aldrin", "Flash Gordon"]
                         }
                     ]
-                    
                 },
                 {
                     id: 2,
@@ -64,37 +65,54 @@ class QuizContainer extends Component {
                             wrongAnswerArray: ["Sega", "Microsoft", "Apple"]
                         }
                     ]
-                    
                 }
-            ],
-            currentQuiz: null,
-        }
+            ]
+        };
         this.handleCurrentQuizChange = this.handleCurrentQuizChange.bind(this);
+        this.handleQuizReset=this.handleQuizReset.bind(this);
     };
 
-    handleCurrentQuizChange(quiz) {
-        this.setState({ currentQuiz: quiz });
+    handleCurrentQuizChange(quizId) {
+        let array = this.state.quizArray;
+        let newQuiz = array.find(quiz => quiz.id == quizId)
+        this.setState({ currentQuiz: newQuiz });
+    }
+
+    handleQuizReset(){
+        this.setState({currentQuiz: null});
     }
 
     render() {
 
-        if (this.currentQuiz === null){
+        if (this.state.currentQuiz === null) {
+
             return (
                 <div>
+                    <NavBar 
+                       
+                        />
                     <QuizList
                         handleCurrentQuizChange={this.handleCurrentQuizChange}
-                        quizArray={this.state.quizArray}                      
+                        quizArray={this.state.quizArray}
                     />
                 </div>
-            ) 
+            )
         } else {
+
             return (
                 <div>
-                    <Quiz quiz={this.currentQuiz}/>
+                    <NavBar
+                        handleQuizReset={this.handleQuizReset}
+                    />
+                    <Quiz
+                        quiz={this.state.currentQuiz}
+                    />
                 </div>
             )
         }
+
     }
+
 }
 
 export default QuizContainer;
