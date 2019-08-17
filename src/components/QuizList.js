@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Quiz from './Quiz';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
@@ -22,11 +23,19 @@ const QuizList = (props) => {
         </li>
     })
  
+        if (props.currentQuiz === null){
         return (
             <ul className="quiz-list">
                 {list}
             </ul>
         )
+        } else {
+            return (
+                <Quiz 
+                quiz={props.currentQuiz}
+                />
+            )
+        }
 }
 
 

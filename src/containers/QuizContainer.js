@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import QuizList from '../components/QuizList';
-import Quiz from '../components/Quiz';
 import NavBar from '../components/NavBar';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import HomePage from '../components/HomePage';
+import CreateAQuiz from '../components/CreateAQuiz';
+
 
 class QuizContainer extends Component {
 
@@ -69,7 +72,7 @@ class QuizContainer extends Component {
             ]
         };
         this.handleCurrentQuizChange = this.handleCurrentQuizChange.bind(this);
-        this.handleQuizReset=this.handleQuizReset.bind(this);
+        this.handleQuizReset = this.handleQuizReset.bind(this);
     };
 
     handleCurrentQuizChange(quizId) {
@@ -78,41 +81,41 @@ class QuizContainer extends Component {
         this.setState({ currentQuiz: newQuiz });
     }
 
-    handleQuizReset(){
-        this.setState({currentQuiz: null});
+    handleQuizReset() {
+        this.setState({ currentQuiz: null });
     }
 
     render() {
 
-        if (this.state.currentQuiz === null) {
-
-            return (
-                <div>
-                    <NavBar 
-                       
-                        />
-                    <QuizList
-                        handleCurrentQuizChange={this.handleCurrentQuizChange}
-                        quizArray={this.state.quizArray}
-                    />
-                </div>
-            )
-        } else {
-
-            return (
-                <div>
+        return (
+            <div>
+                <Router>
                     <NavBar
                         handleQuizReset={this.handleQuizReset}
                     />
-                    <Quiz
-                        quiz={this.state.currentQuiz}
+                    <Route exact path="/"
+                        render={() =>
+                            <HomePage />
+                        }
                     />
-                </div>
-            )
-        }
-
+                    <Route path="/quiz-list"
+                        render={() =>
+                            <QuizList
+                                handleCurrentQuizChange={this.handleCurrentQuizChange}
+                                quizArray={this.state.quizArray}
+                                currentQuiz={this.state.currentQuiz}
+                            />
+                        }
+                    />
+                    <Route path="/create-a-quiz"
+                        render={() =>
+                            <CreateAQuiz />
+                        }
+                    />
+                </Router>
+            </div>
+        )
     }
-
 }
 
 export default QuizContainer;
