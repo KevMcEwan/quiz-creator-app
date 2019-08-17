@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from '../components/HomePage';
 import CreateAQuiz from '../components/CreateAQuiz';
 
-
 class QuizContainer extends Component {
 
     constructor(props) {
