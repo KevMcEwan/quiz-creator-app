@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateNewQuizName from './CreateNewQuizName';
 import CreateNewQuizQuestion from './CreateNewQuizQuestion';
+import arrayOfNumbersCreator from '../helpers/ArrayOfNumbersCreator';
 
 class CreateAQuiz extends Component {
     constructor(props) {
@@ -10,17 +11,17 @@ class CreateAQuiz extends Component {
             numberOfCorrectAnswers: 0,
             questionArray: [],
             numberOfQuestions: 0
-        }
+        };
         this.handleQuizNameChange = this.handleQuizNameChange.bind(this);
-        this.handleNumberOfQuestionsChange=this.handleNumberOfQuestionsChange.bind(this);
+        this.handleNumberOfQuestionsChange = this.handleNumberOfQuestionsChange.bind(this);
     }
 
-    handleQuizNameChange(newQuizName){
-        this.setState({ quizName: newQuizName});
+    handleQuizNameChange(newQuizName) {
+        this.setState({ quizName: newQuizName });
     }
 
-    handleNumberOfQuestionsChange(newNumber){
-        this.setState({numberOfQuestions: newNumber});
+    handleNumberOfQuestionsChange(newNumber) {
+        this.setState({ numberOfQuestions: newNumber });
     }
 
     render() {
@@ -31,7 +32,13 @@ class CreateAQuiz extends Component {
                 handleNumberOfQuestionsChange={this.handleNumberOfQuestionsChange}
             />
         } else {
-            return <CreateNewQuizQuestion />
+            let numberArray = arrayOfNumbersCreator(this.state.numberOfQuestions);
+            const qArray = [];
+            numberArray.map((number)=>{
+                qArray.push(<CreateNewQuizQuestion />)
+            });
+            console.log("qArray: ",qArray);
+            return qArray; 
         }
     }
 

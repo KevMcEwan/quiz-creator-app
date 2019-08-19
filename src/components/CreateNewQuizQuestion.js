@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import arrayOfNumbersCreator from '../helpers/ArrayOfNumbersCreator';
 
 class CreateNewQuizQuestion extends Component {
@@ -10,10 +10,9 @@ class CreateNewQuizQuestion extends Component {
             numberOfAnswerFields: 1,
             answerFieldArray: [],
             wrongAnswerArray: []
-        }
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.createAnswerFieldArray = this.createAnswerFieldArray.bind(this);
     };
 
     handleChange(event) {
@@ -35,43 +34,41 @@ class CreateNewQuizQuestion extends Component {
         event.preventDefault();
         const qText = event.target.questionText.value;
         const answer = event.target.correctAnswer.value;
-        console.log("qText: ", qText);
-        console.log("answer: ", answer);
-        this.setState({questionText: qText});
-        this.setState({correctAnswer: answer});
+        this.setState({ questionText: qText });
+        this.setState({ correctAnswer: answer });
         let wrongAnswerArr = [];
-        this.state.answerFieldArray.map((field)=>{
-            let id = "wrongAnswer" + (this.state.answerFieldArray.indexOf(field) +1);
-            let string = "event.target." + id + ".value"
-            console.log("string: ", string);
+        this.state.answerFieldArray.map((field) => {
+            let id = "wrongAnswer" + (this.state.answerFieldArray.indexOf(field) + 1);
+            let string = "event.target." + id + ".value";
             let wrongAnswer = eval(string);
             wrongAnswerArr.push(wrongAnswer);
         });
-        this.setState({wrongAnswerArray: wrongAnswerArr});
+        this.setState({ wrongAnswerArray: wrongAnswerArr });
     };
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                
-                <input type="text" id="questionText" name="questionText" placeholder="Enter Question" />
-                <input type="text" id="correctAnswer" name="correctAnswer" placeholder="Enter Correct Answer" />
 
-                <select defaultValue="default" onChange={this.handleChange} id="numberOfWrongAnswerFields" name="numberOfWrongAnswerFields">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-                {this.state.answerFieldArray}
-                <input type="submit" value="Submit" />
+            <form onSubmit={this.handleSubmit}>
+                <div className="createQuestion">
+                    <input type="text" id="questionText" name="questionText" placeholder="Enter Question" />
+                    <input type="text" id="correctAnswer" name="correctAnswer" placeholder="Enter Correct Answer" />
+
+                    <select defaultValue="default" onChange={this.handleChange} id="numberOfWrongAnswerFields" name="numberOfWrongAnswerFields">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    {this.state.answerFieldArray}
+                    <input type="submit" value="Submit" />
+                </div>
             </form>
+
         )
     }
 }
-
-
 
 export default CreateNewQuizQuestion;
 

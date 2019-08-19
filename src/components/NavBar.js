@@ -9,7 +9,7 @@ const NavBar = (props) => {
 
     return (
 
-        <div className="home-page">
+        <div className="nav-bar">
             <Link to="/">HOME</Link>
             <Link to="/quiz-list" onClick={handleClick}>QUIZ LIST</Link>
             <Link to="/create-a-quiz">CREATE A QUIZ</Link>

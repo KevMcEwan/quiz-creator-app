@@ -1,9 +1,13 @@
+body {
+  background-color: lightgrey;
+}
+
 .quiz {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 80%;
-  margin: 10%
+  margin: 10%;
 }
 
 .question {
@@ -57,4 +61,18 @@
   font-size: 36px;
   text-align: center;
   margin: 1%;
+}
+
+.createQuestion {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-top: 1%;
+}
+
+.nav-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
