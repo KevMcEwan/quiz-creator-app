@@ -8,13 +8,19 @@ class CreateAQuiz extends Component {
         this.state = {
             quizName: null,
             numberOfCorrectAnswers: 0,
-            questionArray: []
+            questionArray: [],
+            numberOfQuestions: 0
         }
         this.handleQuizNameChange = this.handleQuizNameChange.bind(this);
+        this.handleNumberOfQuestionsChange=this.handleNumberOfQuestionsChange.bind(this);
     }
 
     handleQuizNameChange(newQuizName){
         this.setState({ quizName: newQuizName});
+    }
+
+    handleNumberOfQuestionsChange(newNumber){
+        this.setState({numberOfQuestions: newNumber});
     }
 
     render() {
@@ -22,6 +28,7 @@ class CreateAQuiz extends Component {
         if (this.state.quizName === null) {
             return <CreateNewQuizName
                 handleQuizNameChange={this.handleQuizNameChange}
+                handleNumberOfQuestionsChange={this.handleNumberOfQuestionsChange}
             />
         } else {
             return <CreateNewQuizQuestion />
