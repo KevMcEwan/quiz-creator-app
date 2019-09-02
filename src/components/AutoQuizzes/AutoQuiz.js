@@ -1,53 +1,89 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AutoQuizQuestion from './AutoQuizQuestion';
 import AutoQuizAnswerField from './AutoQuizAnswerField';
 
-const AutoQuiz = (props) => {
 
-    const currentQuiz = props.currentQuiz;
-
-    const countriesArray = props.countriesArray;
-
-    let questionList = countriesArray.map((country) => {
-        if (currentQuiz === "Capitals") {
-            return <li>
-                <AutoQuizQuestion 
-                currentQuiz={props.currentQuiz}
-                questionSubject={country.capital}
-                countryName={country.name}
-                />
-                <AutoQuizAnswerField />
-                </li>
-        } else if (currentQuiz === "Currencies") {
-            return <li>
-                <AutoQuizQuestion
-                    currentQuiz={props.currentQuiz}
-                    questionSubject={country.currency}
-                    countryName={country.name}
-                />
-                <AutoQuizAnswerField />
-            </li>
-        } else if (currentQuiz === "Flags") {
-            return <li>
-                <AutoQuizQuestion
-                    currentQuiz={props.currentQuiz}
-                    questionSubject={country.flag}
-                    countryName={country.name}
-                />
-                <AutoQuizAnswerField />
-            </li>
+class AutoQuiz extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentQuiz: props.currentQuiz,
+            countriesArray: props.countriesArray,
+            totalNumberOfQuestions: 0,
+            numberOfCorrectAnswers: 0,
         }
-    })
+        this.updateNumberOfCorrectAnswers = this.updateNumberOfCorrectAnswers.bind(this);
+        this.setPercentageResult = this.setPercentageResult.bind(this);
+    }
 
+    updateNumberOfCorrectAnswers(number) {
+        const newNumber = this.state.numberOfCorrectAnswers + number;
+        this.setState({ numberOfCorrectAnswers: newNumber })
+    }
 
-    return (
-        <div>
-            "Current Quiz is" {currentQuiz}
-            <ul>
-                {questionList}
-            </ul>
-        </div>
-    )
+    setPercentageResult() {
+
+    }
+
+    render() {
+        let questionList = this.state.countriesArray.map((country) => {
+
+            if (this.state.currentQuiz === "Capitals") {
+
+                if (country.capital !== "") {
+                    return <li>
+                        <AutoQuizQuestion
+                            currentQuiz={this.state.currentQuiz}
+                            correctAnswer={country.capital.toLowerCase()}
+                            countryName={country.name}
+                            updateNumberOfCorrectAnswers={this.updateNumberOfCorrectAnswers}
+                        />
+                    </li>
+                }
+
+            } else if (this.state.currentQuiz === "Currencies") {
+
+                let correctAnswer = "";
+
+                if (country.currencies[0].code === undefined) {
+                    correctAnswer = country.currencies[1].code.toLowerCase();
+                } else {
+                    correctAnswer = country.currencies[0].code.toLowerCase();
+                }
+                return <li>
+                    <AutoQuizQuestion
+                        currentQuiz={this.state.currentQuiz}
+                        correctAnswer={correctAnswer}
+                        countryName={country.name}
+                        updateNumberOfCorrectAnswers={this.updateNumberOfCorrectAnswers}
+                    />
+                </li>
+
+            } else if (this.state.currentQuiz === "Flags") {
+                return <li>
+                    <AutoQuizQuestion
+                        currentQuiz={this.state.currentQuiz}
+                        flag={country.flag}
+                        correctAnswer={country.name.toLowerCase()}
+                        updateNumberOfCorrectAnswers={this.updateNumberOfCorrectAnswers}
+                    />
+                </li>
+            }
+        })
+
+       const numOfQs = questionList.length;    
+
+        console.log("number of Qs: ", numOfQs);
+
+        return (
+            <div>
+                {this.state.currentQuiz} Quiz. This quiz has {questionList.length} questions.
+            <ol>
+                    {questionList}
+                </ol>
+            </div>
+        )
+    }
 }
 
-export default AutoQuiz
+export default AutoQuiz;
