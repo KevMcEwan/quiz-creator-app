@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from '../components/HomePage';
 import CreateAQuiz from '../components/CreateAQuiz';
+import AutoQuizList from '../components/AutoQuizzes/AutoQuizList';
 
 class QuizContainer extends Component {
 
@@ -95,6 +96,12 @@ class QuizContainer extends Component {
                     <Route exact path="/"
                         render={() =>
                             <HomePage />
+                        }
+                    />
+                    <Route path="/auto-quiz-list"
+                        render={() =>
+                            <AutoQuizList />
+
                         }
                     />
                     <Route path="/quiz-list"

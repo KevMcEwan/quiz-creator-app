@@ -76,3 +76,7 @@ body {
   width: 100%;
   justify-content: space-around;
 }
+
+.country-flag {
+  width: 25%;
+}

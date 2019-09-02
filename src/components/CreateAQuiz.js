@@ -14,6 +14,7 @@ class CreateAQuiz extends Component {
         };
         this.handleQuizNameChange = this.handleQuizNameChange.bind(this);
         this.handleNumberOfQuestionsChange = this.handleNumberOfQuestionsChange.bind(this);
+        this.handleQuestionArray = this.handleQuestionArray.bind(this);
     }
 
     handleQuizNameChange(newQuizName) {
@@ -22,6 +23,12 @@ class CreateAQuiz extends Component {
 
     handleNumberOfQuestionsChange(newNumber) {
         this.setState({ numberOfQuestions: newNumber });
+    }
+
+    handleQuestionArray(question) {
+        let array = [];
+        array.push(question);
+        this.setState({questionArray: array});
     }
 
     render() {
@@ -34,11 +41,16 @@ class CreateAQuiz extends Component {
         } else {
             let numberArray = arrayOfNumbersCreator(this.state.numberOfQuestions);
             const qArray = [];
-            numberArray.map((number)=>{
-                qArray.push(<CreateNewQuizQuestion />)
+            numberArray.map((number) => {
+                qArray.push(
+                    <CreateNewQuizQuestion
+                        questionNumber={number}
+                        handleQuestionArray={this.handleQuestionArray}
+                    />
+                )
             });
-            console.log("qArray: ",qArray);
-            return qArray; 
+            console.log("qArray: ", qArray);
+            return qArray;
         }
     }
 

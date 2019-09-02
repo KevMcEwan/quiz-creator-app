@@ -5,6 +5,7 @@ class CreateNewQuizQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            questionNumber: props.questionNumber,
             questionText: "",
             correctAnswer: "",
             numberOfAnswerFields: 1,
@@ -44,17 +45,21 @@ class CreateNewQuizQuestion extends Component {
             wrongAnswerArr.push(wrongAnswer);
         });
         this.setState({ wrongAnswerArray: wrongAnswerArr });
+        let question = this.state;
+        this.props.handleQuestionArray(question);
     };
 
     render() {
         return (
-
             <form onSubmit={this.handleSubmit}>
                 <div className="createQuestion">
+                    <div>{this.state.questionNumber}.
                     <input type="text" id="questionText" name="questionText" placeholder="Enter Question" />
+                    </div>
                     <input type="text" id="correctAnswer" name="correctAnswer" placeholder="Enter Correct Answer" />
 
                     <select defaultValue="default" onChange={this.handleChange} id="numberOfWrongAnswerFields" name="numberOfWrongAnswerFields">
+                        <option disabled value="default">Select number of incorrect answers</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -65,7 +70,6 @@ class CreateNewQuizQuestion extends Component {
                     <input type="submit" value="Submit" />
                 </div>
             </form>
-
         )
     }
 }
